@@ -1,0 +1,28 @@
+{
+  "video_script": [
+    {"goto": "/", "wait_ms": 2500, "caption": "Landing - voice-first kirana agent"},
+    {"click": "a[href='/dashboard']", "wait_ms": 1500},
+    {"click": "button:has-text('Load demo phrase')", "wait_ms": 500},
+    {"fill": "textarea#prompt", "value": "Aaj 12 Parle-G bik gaye aur dahi khatam ho gaya", "wait_ms": 500},
+    {"click": "button:has-text('Submit to agent')", "wait_ms": 4000},
+    {"scroll": 400, "wait_ms": 1500},
+    {"hover": ".card:first-child", "wait_ms": 1500},
+    {"goto": "/settings", "wait_ms": 1500, "caption": "API keys for live Gemini and Atlas"}
+  ],
+  "screenshot_shots": [
+    {"path": "/", "description": "Hero landing with architecture diagram", "wait_ms": 2500},
+    {"path": "/dashboard", "description": "Live dashboard with seeded kirana stock", "wait_ms": 2000},
+    {"path": "/settings", "description": "Settings for Gemini and MongoDB keys", "wait_ms": 1500}
+  ],
+  "submission": {
+    "inspiration": "We grew up watching kirana uncles track everything in their heads. Research puts 25-30% revenue loss on those stores from stockouts alone, yet every startup ships another dashboard nobody has time to open. We built Dukaan Mitra so the owner can talk while serving customers and still get a real inventory system underneath.",
+    "what_it_does": "Dukaan Mitra AI is a voice-first agent for India's kirana shops. Owners speak Hindi or Hinglish about what sold and what ran out. The agent resolves fuzzy names like dahi to real SKUs with MongoDB Atlas Vector Search via the MCP server, writes stock and sales, forecasts festival spikes like Navratri dairy demand, and drafts supplier reorders that only send after a one-tap confirm.",
+    "how_we_built_it": "We used Next.js 14 and Tailwind with a live mirror dashboard, Gemini 2.0 Flash for multilingual parsing, and a MongoDB MCP-shaped tool layer (find, aggregate vector search, updateOne, insertMany) that runs against Atlas when judges paste a URI or falls back to an in-memory demo with identical traces. Festival forecasting uses calendar rules tuned for Navratri and Diwali. Docker ships a standalone build on port 3000.",
+    "challenges": "Hinglish ASR is flaky in the browser, so we added a typed fallback that hits the same MCP tools. Atlas M0 clusters may lack vector indexes, so we layered semantic alias scoring that mirrors vector search behavior without breaking the demo.",
+    "accomplishments": "We shipped a 60-second story that is obvious on screen: speak, watch MCP logs, see stock move, read the Navratri forecast, confirm a reorder. Every MVP feature works in demo mode with zero keys.",
+    "what_we_learned": "The MongoDB MCP server's auto-embed path means hackathon teams can skip a custom embedding pipeline. Shopkeepers do not want agents that only chat - they want confirm gates before money moves.",
+    "whats_next": "Wire Gemini 3.1 Flash Live for full duplex Hindi voice, connect the official MongoDB MCP stdio process on Cloud Run ADK, add expiry-based spoilage alerts, and pilot with two real kirana stores in Delhi.",
+    "built_with": ["next.js-14", "typescript", "tailwindcss", "gemini-api", "mongodb-atlas", "mongodb-mcp", "docker", "sonner"],
+    "category_hint": "Brick-and-Mortar Retail / MongoDB partner bucket"
+  }
+}
